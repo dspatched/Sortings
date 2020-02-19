@@ -17,7 +17,7 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] arr = MergeSorting.sort(ConsoleInput.input());
-        int num = 5; // enter a number to search here
+        int num = ConsoleInput.inputNumber(); // enter a number to search here
         System.out.println("Sorted array: ");
         Arrays.stream(arr).forEach(n -> System.out.print(n + " "));
         System.out.println();

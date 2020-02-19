@@ -14,7 +14,6 @@ public class ConsoleInput {
         System.out.println("Enter array (in one line separated by whitespaces)");
         String[] arrItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-        scanner.close();
         for (int i = 0; i < n; i++) {
             int arrItem = Integer.parseInt(arrItems[i]);
             arr[i] = arrItem;
