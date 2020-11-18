@@ -32,6 +32,7 @@ public class QuickSorting {
     public static void main(String[] args) {
         int[] arr = ConsoleInput.input();
         sort(arr, 0, arr.length-1);
+        System.out.print("SORTED ARRAY: ");
         Arrays.stream(arr).forEach(System.out::print);
     }
 }
