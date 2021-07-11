@@ -18,7 +18,6 @@ public class InsertSorting {
 
     public static void main(String[] args) {
         int[] arr = ConsoleInput.input();
-        arr = sort(arr);
-        Arrays.stream(arr).forEach(System.out::print);
+        Arrays.stream(sort(arr)).forEach(n -> System.out.print(n + " "));
     }
 }

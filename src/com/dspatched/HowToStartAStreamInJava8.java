@@ -1,6 +1,7 @@
 package com.dspatched;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -34,5 +35,8 @@ public class HowToStartAStreamInJava8 {
         System.out.println();
 
         // 6 разных способов в итоге
+
+        int sum = list.stream().collect(Collectors.summingInt(i -> i)); // посчитаем сумму через один из методов Collector'а
+        System.out.println(sum);
     }
 }

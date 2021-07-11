@@ -2,7 +2,7 @@ package com.dspatched;
 
 import java.util.Arrays;
 
-public abstract class MergeSorting {
+public class MergeSorting {
 
     static int[] sort(int[] arr) {
         int n = arr.length;
@@ -31,7 +31,6 @@ public abstract class MergeSorting {
 
     public static void main(String[] args) {
         int[] arr = ConsoleInput.input();
-        arr = sort(arr);
-        Arrays.stream(arr).forEach(System.out::print);
+        Arrays.stream(sort(arr)).forEach(n -> System.out.print(n + " "));
     }
 }

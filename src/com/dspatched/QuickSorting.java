@@ -32,6 +32,6 @@ public class QuickSorting {
     public static void main(String[] args) {
         int[] arr = ConsoleInput.input();
         sort(arr, 0, arr.length-1);
-        Arrays.stream(arr).forEach(System.out::print);
+        Arrays.stream(arr).forEach(n -> System.out.print(n + " "));
     }
 }
