@@ -13,7 +13,7 @@ public class QuickSorting {
     }
 
     private static int rearrangment(int[] arr, int min, int max) {
-        int pivot = arr[max];
+        int pivot = arr[max]; // pivot really should be randomized for sake of better average performance
         int pInd = min;
         int tmp;
         for (int i = min; i < max; ++i) {
