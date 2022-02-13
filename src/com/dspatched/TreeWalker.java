@@ -13,9 +13,14 @@ public class TreeWalker {
 
     public static void main(String[] args) {
         Node root = populateTree();
-        TreeWalker treeWalker = new TreeWalker(root);
-        treeWalker.traverseBreadthFirst();
-        //treeWalker.traverseDepthFirst();
+        TreeWalker treeWalker1 = new TreeWalker(root);
+        System.out.println("BREADTH FIRST:");
+        treeWalker1.traverseBreadthFirst();
+
+        System.out.println();
+        System.out.println("DEPTH FIRST:");
+        TreeWalker treeWalker2 = new TreeWalker(root);
+        treeWalker2.traverseDepthFirst();
     }
 
     private static Node populateTree() {
@@ -61,6 +66,7 @@ public class TreeWalker {
         while (!stack.isEmpty()) {
             Node node = stack.pop();
             while (node != null) {
+                System.out.print(node.id);
                 if (node.left != null) {
                     if (node.right != null) stack.push(node.right);
                     node = node.left;
@@ -69,6 +75,7 @@ public class TreeWalker {
                 }
             }
         }
+        System.out.println();
     }
 
 }
