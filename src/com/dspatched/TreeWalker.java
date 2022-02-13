@@ -1,6 +1,7 @@
 package com.dspatched;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class TreeWalker {
 
@@ -14,6 +15,7 @@ public class TreeWalker {
         Node root = populateTree();
         TreeWalker treeWalker = new TreeWalker(root);
         treeWalker.traverseBreadthFirst();
+        //treeWalker.traverseDepthFirst();
     }
 
     private static Node populateTree() {
@@ -35,19 +37,36 @@ public class TreeWalker {
     }
 
     public void traverseBreadthFirst() {
-        LinkedList<Node> deque = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
         if (currentNode == null) return;
         System.out.print(currentNode.id);
-        deque.offer(currentNode);
-        while (!deque.isEmpty()) {
-            currentNode = deque.poll();
+        queue.offer(currentNode);
+        while (!queue.isEmpty()) {
+            currentNode = queue.poll();
             if (currentNode.left != null) {
-                deque.offer(currentNode.left);
+                queue.offer(currentNode.left);
                 System.out.print(currentNode.left.id);
             }
             if (currentNode.right != null) {
-                deque.offer(currentNode.right);
+                queue.offer(currentNode.right);
                 System.out.print(currentNode.right.id);
+            }
+        }
+    }
+
+    public void traverseDepthFirst() {
+        LinkedList<Node> stack = new LinkedList<>();
+        if (currentNode == null) return;
+        stack.push(currentNode);
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            while (node != null) {
+                if (node.left != null) {
+                    if (node.right != null) stack.push(node.right);
+                    node = node.left;
+                } else {
+                    node = node.right;
+                }
             }
         }
     }
