@@ -11,16 +11,20 @@ public class TreeWalker {
 
     private Node currentNode;
 
+    public void setCurrentNode(Node currentNode) {
+        this.currentNode = currentNode;
+    }
+
     public static void main(String[] args) {
         Node root = populateTree();
-        TreeWalker treeWalker1 = new TreeWalker(root);
+        TreeWalker treeWalker = new TreeWalker(root);
         System.out.println("BREADTH FIRST:");
-        treeWalker1.traverseBreadthFirst();
+        treeWalker.traverseBreadthFirst();
 
+        treeWalker.setCurrentNode(root);
         System.out.println();
         System.out.println("DEPTH FIRST:");
-        TreeWalker treeWalker2 = new TreeWalker(root);
-        treeWalker2.traverseDepthFirst();
+        treeWalker.traverseDepthFirst();
     }
 
     private static Node populateTree() {
