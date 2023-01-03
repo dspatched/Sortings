@@ -12,7 +12,7 @@ public class HowToStartAStreamInJava8 {
     public static void main(String[] args) {
 
         Stream.of(1,2,3).forEach(System.out::print); // of(vararg)
-        System.out.println();
+        System.out.println(" ");
 
         Stream.iterate(1, i -> ++i).limit(3).peek(i -> ++i).forEach(System.out::print); // iterate(seed, UnaryOperator)
         System.out.println();
