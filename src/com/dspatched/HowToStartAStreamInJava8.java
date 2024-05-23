@@ -12,12 +12,12 @@ public class HowToStartAStreamInJava8 {
     public static void main(String[] args) {
 
         Stream.of(1,2,3).forEach(System.out::print); // of(vararg)
-        System.out.println("");
-
-        Stream.iterate(1, i -> ++i).limit(3).peek(i -> ++i).forEach(System.out::print); // iterate(seed, UnaryOperator)
         System.out.println();
 
         Stream.generate(() -> ++field).limit(3).forEach(System.out::print); // generate(Supplier)
+        System.out.println();
+
+        Stream.iterate(0, x -> x + 1).limit(3).forEach(System.out::println);
         System.out.println();
 
         int[] array = new int[]{1,2,3};
