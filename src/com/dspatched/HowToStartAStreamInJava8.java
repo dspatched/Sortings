@@ -2,6 +2,7 @@ package com.dspatched;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -10,6 +11,9 @@ public class HowToStartAStreamInJava8 {
     static int field = 0;
 
     public static void main(String[] args) {
+
+        IntStream.rangeClosed(1,3).forEach(System.out::print);
+        System.out.println();
 
         Stream.of(1,2,3).forEach(System.out::print); // of(vararg)
         System.out.println();
