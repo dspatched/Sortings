@@ -30,6 +30,7 @@ public class Task1 {
         solveWithHashMap(arr1, arr2, arr3);
     }
 
+    // то что пришло в голову сразу же
     private static Integer withSetStandardMethods(int[] arr1, int[] arr2, int[] arr3) {
         Set<Integer> set = Arrays.stream(arr1)
                 .boxed()
@@ -46,6 +47,7 @@ public class Task1 {
         return set.stream().findFirst().orElseThrow(() -> new RuntimeException("No such number found"));
     }
 
+    // не используем вспомогательных структур данных, меньше всего переборов при оптимальном сценарии выполнения
     private Integer rightWay(int[] arr1, int[] arr2, int[] arr3) {
         int len1 = arr1.length;
         int len2 = arr2.length;
