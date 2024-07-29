@@ -2,7 +2,6 @@ package com.dspatched;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Task1 {
 
@@ -27,7 +26,7 @@ public class Task1 {
         Task1 task1 = new Task1();
         System.out.println(task1.rightWay(arr1, arr2, arr3));
 
-        solveWithHashMap(arr1, arr2, arr3);
+        System.out.println(solveWithHashMap(arr1, arr2, arr3));
     }
 
     // то что пришло в голову сразу же
@@ -106,7 +105,7 @@ public class Task1 {
         return i;
     }
 
-    private static void solveWithHashMap(int[] arr1, int[] arr2, int[] arr3) {
+    private static Integer solveWithHashMap(int[] arr1, int[] arr2, int[] arr3) {
         Map<Integer, Integer> map1 = new HashMap<>();
         for (int i = 0; i < arr1.length; i++) {
             if (!(i > 0 && arr1[i] == arr1[i-1])) map1.put(arr1[i], 1);
@@ -121,8 +120,7 @@ public class Task1 {
         for (int i = 0; i < arr3.length; i++) {
             if (!(i > 0 && arr3[i] == arr3[i-1])) {
                 if (map1.containsKey(arr3[i])) {
-                    System.out.println(arr3[i]);
-                    return;
+                    return arr3[i];
                 }
             }
         }
