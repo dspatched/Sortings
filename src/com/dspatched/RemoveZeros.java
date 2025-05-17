@@ -1,9 +1,6 @@
 package com.dspatched;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class RemoveZeros {
@@ -11,8 +8,12 @@ public class RemoveZeros {
     public static void main(String[] args) {
         RemoveZeros rz = new RemoveZeros();
         List<Integer> list = new ArrayList<>(List.of(0, 1, 2, 3, 0, 6, 2, 0, 8, 9));
-        rz.removeZeros(list);
-        list.forEach(System.out::print);
+        //rz.removeZeros(list);
+        //list.forEach(System.out::print);
+
+        int[] arr = new int[]{0, 1, 2, 0, 5, 0, 4, 0, -3};
+        rz.moveZeros(arr);
+        Arrays.stream(arr).forEach(System.out::print);
     }
 
     void removeZeros(List<Integer> list) {
@@ -36,6 +37,20 @@ public class RemoveZeros {
                 list.remove(current);
                 i--;
                 listSize--;
+            }
+        }
+    }
+
+    void moveZeros(int[] arr) {
+        int idx = 0;
+        int size = arr.length;
+        for (int i = 0; i < size; i++) {
+            if (arr[i] != 0) {
+                if (idx < i) {
+                    arr[idx] = arr[i];
+                    arr[i] = 0;
+                }
+                idx++;
             }
         }
     }
