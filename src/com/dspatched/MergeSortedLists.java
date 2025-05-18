@@ -18,6 +18,24 @@ public class MergeSortedLists {
         intersection.forEach(e -> System.out.print(e + " "));
     }
 
+    private static List<Integer> simpleMerge(List<Integer> list1, List<Integer> list2) {
+        List<Integer> resultList = new ArrayList<>();
+        int size1 = list1.size();
+        int size2 = list2.size();
+        int i = 0;
+        int j = 0;
+        while (i < size1 && j < size2) {
+            resultList.add(list1.get(i) < list2.get(j) ? list1.get(i++) : list2.get(j++));
+        }
+        while (i < size1) {
+            resultList.add(list1.get(i++));
+        }
+        while (j < size2) {
+            resultList.add(list2.get(j++));
+        }
+        return resultList;
+    }
+
     private static List<Integer> unionMerge2(List<Integer> list1, List<Integer> list2) {
         TreeSet<Integer> treeSet = new TreeSet<>(list1);
         treeSet.addAll(list2);
