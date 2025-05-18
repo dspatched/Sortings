@@ -7,14 +7,14 @@ import java.util.TreeSet;
 public class MergeSortedLists {
 
     public static void main(String[] args) {
-        List<Integer> list1 = new ArrayList<>(List.of(1, 2, 3, 4, 7, 7, 9, 13, 13));
-        List<Integer> list2 = new ArrayList<>(List.of(0, 1, 4, 4, 4, 5, 13, 15));
+        List<Integer> list1 = new ArrayList<>(List.of(1, 2, 3, 4, 7, 7, 9, 13, 13, 15));
+        List<Integer> list2 = new ArrayList<>(List.of(0, 1, 4, 4, 4, 5, 13, 13, 15, 15, 15, 15));
 //        List<Integer> list1 = new ArrayList<>(List.of(1, 4, 4, 4));
 //        List<Integer> list2 = new ArrayList<>(List.of(1, 4, 4, 4, 4));
         List<Integer> resultList = unionMergeMaxRepeat(list1, list2);
         resultList.forEach(e -> System.out.print(e + " "));
         System.out.println();
-        List<Integer> intersection = intersection2(list1, list2);
+        List<Integer> intersection = intersection(list1, list2);
         intersection.forEach(e -> System.out.print(e + " "));
     }
 
@@ -34,6 +34,40 @@ public class MergeSortedLists {
             treeSet.retainAll(list1);
         }
         return new ArrayList<>(treeSet);
+    }
+
+    private static List<Integer> intersection(List<Integer> list1, List<Integer> list2) {
+        List<Integer> resultList = new ArrayList<>();
+        int size1 = list1.size();
+        int size2 = list2.size();
+        int i = 0;
+        int j = 0;
+        Integer e = null;
+        while (i < size1 || j < size2) {
+            if (i == size1) {
+                e = list2.get(j++);
+            } else if (j == size2) {
+                e = list1.get(i++);
+            } else {
+                int e1 = list1.get(i);
+                int e2 = list2.get(j);
+                if (e1 < e2) {
+                    e = e1;
+                    i++;
+                } else if (e1 > e2) {
+                    e = e2;
+                    j++;
+                } else {
+                    e = e1;
+                    i++;
+                    j++;
+                }
+                if (list1.contains(e) && list2.contains(e)) {
+                    resultList.add(e);
+                }
+            }
+        }
+        return resultList;
     }
 
     private static List<Integer> unionMergeNoRepeat(List<Integer> list1, List<Integer> list2) {
