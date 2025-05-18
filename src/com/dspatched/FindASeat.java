@@ -4,8 +4,8 @@ public class FindASeat {
 
     public static void main(String[] args) {
         FindASeat fs = new FindASeat();
-        //int seat = fs.findSeat(new int[]{0,1,1,0});
-        int seat = fs.findSeat(new int[]{0,1,0,0,1,0,0,0,0,0,1});
+        int seat = fs.findSeat(new int[]{0,1,1,0,0});
+        //int seat = fs.findSeat(new int[]{0,1,0,0,1,0,0,0,0,0,1});
         System.out.println("EMPTY SEAT NUMBER WHICH IS FARTHEST FROM OTHERS: " + seat);
     }
 
@@ -52,6 +52,18 @@ public class FindASeat {
         }
 
         if (maxZeros > 0) {
+            if (maxZeros == len) {
+                System.out.println("ROW IS EMPTY");
+                return 0;
+            }
+            if (maxZerosFirstIndex == 0) {
+                System.out.println("MIN DISTANCE FROM CLOSEST PERSON: " +  maxZeros);
+                return 0;
+            }
+            if (maxZerosLastIndex == len - 1) {
+                System.out.println("MIN DISTANCE FROM CLOSEST PERSON: " +  maxZeros);
+                return maxZerosLastIndex;
+            }
             if (maxZeros % 2 == 0) {
                 System.out.println("MIN DISTANCE FROM CLOSEST PERSON: " +  maxZeros / 2);
             } else {
