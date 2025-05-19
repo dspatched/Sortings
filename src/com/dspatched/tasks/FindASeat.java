@@ -1,4 +1,4 @@
-package com.dspatched;
+package com.dspatched.tasks;
 
 public class FindASeat {
 

@@ -1,4 +1,4 @@
-package com.dspatched;
+package com.dspatched.tasks;
 
 import java.util.*;
 import java.util.stream.Stream;
