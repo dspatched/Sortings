@@ -1,6 +1,7 @@
 package com.dspatched;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -16,6 +17,27 @@ public class MergeSortedLists {
         System.out.println();
         List<Integer> intersection = intersection(list1, list2);
         intersection.forEach(e -> System.out.print(e + " "));
+
+        int[] num1 = new int[]{1,2,3,0,0,0};
+        int[] num2 = new int[]{2,5,6};
+        simpleMerge(num1, 3, num2, 3);
+        Arrays.stream(num1).forEach(System.out::print);
+    }
+
+    public static void simpleMerge(int[] nums1, int m, int[] nums2, int n) {
+        int[] copyNums1 = Arrays.copyOf(nums1, m);
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < m && j < n) {
+            nums1[k++] = copyNums1[i] < nums2[j] ? copyNums1[i++] : nums2[j++];
+        }
+        while (i < m) {
+            nums1[k++] = copyNums1[i++];
+        }
+        while (j < n) {
+            nums1[k++] = nums2[j++];
+        }
     }
 
     private static List<Integer> simpleMerge(List<Integer> list1, List<Integer> list2) {
