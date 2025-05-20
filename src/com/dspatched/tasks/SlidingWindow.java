@@ -1,9 +1,6 @@
 package com.dspatched.tasks;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class SlidingWindow {
 
