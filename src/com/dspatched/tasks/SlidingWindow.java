@@ -1,12 +1,41 @@
 package com.dspatched.tasks;
 
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Set;
 
 public class SlidingWindow {
 
     public static void main(String[] args) {
-        String s = "abcabcbb";
-        System.out.println(lengthOfLongestSubstring(s));
+        //System.out.println(lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(reverseWords("the sky is blue"));
+    }
+
+    public static String reverseWords(String s) {
+        String result = "";
+        String curWord = "";
+        Deque<String> wordStack = new LinkedList<String>();
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            if (cur != ' ') {
+                curWord = curWord + cur;
+            }
+            if (cur == ' ' || i == s.length() - 1) {
+                if (!curWord.isEmpty()) {
+                    wordStack.push(curWord);
+                    curWord = "";
+                }
+            }
+        }
+        int n = wordStack.size();
+        for (int i = 0; i < n; i++) {
+            result = result + wordStack.pop();
+            if (i != n - 1) {
+                result += " ";
+            }
+        }
+        return result;
     }
 
     public static int lengthOfLongestSubstring(String s) {
@@ -18,6 +47,7 @@ public class SlidingWindow {
         int maxLength = 0;
         int left = 0;
         int curLength = 0;
+        Deque<String> wordStack = new LinkedList<String>();
 
         for (int right = 0; right < s.length(); right++) {
             char cur = s.charAt(right);
