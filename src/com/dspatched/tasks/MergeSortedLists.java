@@ -76,6 +76,34 @@ public class MergeSortedLists {
         return new ArrayList<>(treeSet);
     }
 
+    private static int[] intersection(int[] nums1, int[] nums2) {
+        int size1 = nums1.length;
+        int size2 = nums2.length;
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int[] result = new int[Math.min(size1, size2)];
+        int i = 0;
+        int j = 0;
+        int cnt = 0;
+        while (i < size1 && j < size2) {
+            int e1 = nums1[i];
+            int e2 = nums2[j];
+            if (e1 > e2) {
+                j++;
+            } else if (e1 < e2) {
+                i++;
+            } else {
+                if (cnt == 0 || result[cnt-1] != e1) {
+                    result[cnt] = e1;
+                    cnt++;
+                }
+                i++;
+                j++;
+            }
+        }
+        return Arrays.copyOf(result, cnt);
+    }
+
     private static List<Integer> intersection(List<Integer> list1, List<Integer> list2) {
         List<Integer> resultList = new ArrayList<>();
         int size1 = list1.size();
