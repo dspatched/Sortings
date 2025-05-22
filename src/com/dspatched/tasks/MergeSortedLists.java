@@ -1,9 +1,7 @@
 package com.dspatched.tasks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MergeSortedLists {
 
@@ -74,6 +72,28 @@ public class MergeSortedLists {
             treeSet.retainAll(list1);
         }
         return new ArrayList<>(treeSet);
+    }
+
+    private static int[] intersection2(int[] nums1, int[] nums2) {
+        Set<Integer> set1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
+        Set<Integer> set2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
+        int[] res;
+        if (set1.size() >= set2.size()) {
+            set1.retainAll(set2);
+            res = new int[set1.size()];
+            int i = 0;
+            for (Integer num : set1) {
+                res[i++] = num;
+            }
+        } else {
+            set2.retainAll(set1);
+            res = new int[set2.size()];
+            int i = 0;
+            for (Integer num : set2) {
+                res[i++] = num;
+            }
+        }
+        return res;
     }
 
     private static int[] intersection(int[] nums1, int[] nums2) {

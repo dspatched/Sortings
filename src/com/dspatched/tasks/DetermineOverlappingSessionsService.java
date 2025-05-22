@@ -1,4 +1,4 @@
-package com.dspatched;
+package com.dspatched.tasks;
 
 import java.util.Arrays;
 import java.util.List;
