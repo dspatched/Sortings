@@ -1,10 +1,51 @@
 package com.dspatched.tasks;
 
+import java.util.Arrays;
+
 public class Matrixes {
 
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{-10,-10},{-9,-9},{-8,-6},{-4,-2},{0,1},{3,3},{5,5},{6,8}};
         System.out.println(searchMatrix(matrix, 0));
+
+        int[][] intervals = new int[][]{{1,4},{5,6},{10,12},{11,15}};
+        Arrays.stream(merge(intervals))
+                .forEach(arr -> Arrays.stream(arr).forEach(System.out::print));
+    }
+
+    private static int[][] merge(int[][] intervals) {
+        int num = intervals.length;
+        if (num == 1) {
+            return intervals;
+        }
+        int[][] res = new int[num][2];
+        int[] curMerged = Arrays.copyOf(intervals[0], 2);
+        int cnt = 0;
+        boolean prevOverlap = false;
+        for (int i = 0; i < num; i++) {
+            if (i < (num - 1) && curMerged[1] >= intervals[i+1][0] && curMerged[0] <= intervals[i+1][1]) {
+                if (!prevOverlap) {
+                    curMerged[0] = Math.min(intervals[i][0], intervals[i+1][0]);
+                    curMerged[1] = Math.max(intervals[i][1], intervals[i+1][1]);
+                } else {
+                    curMerged[0] = Math.min(curMerged[0], intervals[i+1][0]);
+                    curMerged[1] = Math.max(curMerged[1], intervals[i+1][1]);
+                }
+                prevOverlap = true;
+            } else if (i == num - 1 && !prevOverlap) {
+                res[cnt++] = Arrays.copyOf(curMerged, 2);
+            } else {
+                if (curMerged[0] != curMerged[1]) {
+                    res[cnt++] = Arrays.copyOf(curMerged, 2);
+                }
+                if (i < num - 1) {
+                    curMerged[0] = intervals[i+1][0];
+                    curMerged[1] = intervals[i+1][1];
+                }
+                prevOverlap = false;
+            }
+        }
+        return Arrays.copyOf(res, cnt);
     }
 
     private static boolean searchMatrix(int[][] matrix, int target) {
