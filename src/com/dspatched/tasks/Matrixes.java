@@ -54,7 +54,7 @@ public class Matrixes {
         if (matrix[0][0] > target || matrix[m][n] < target) {
             return false;
         }
-        if (matrix[0][0] == target || matrix[m][n] < target) {
+        if (matrix[0][0] == target || matrix[m][n] == target) {
             return true;
         }
         int vertStart = 0;

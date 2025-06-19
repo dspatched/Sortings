@@ -44,7 +44,6 @@ public class SlidingWindow {
         int maxLength = 0;
         int left = 0;
         int curLength = 0;
-        Deque<String> wordStack = new LinkedList<String>();
 
         for (int right = 0; right < s.length(); right++) {
             char cur = s.charAt(right);
