@@ -7,7 +7,7 @@ public class MergeIntervalsSolver {
 
     public static void main(String[] args) {
         MergeIntervalsSolver solver = new MergeIntervalsSolver();
-        int[][] intervals = new int[][]{{1,4},{0,0}};
+        int[][] intervals = new int[][]{{0,0},{1,3},{2,6},{8,10},{15,18}};
         var result = solver.merge(intervals);
         for (int[] arr : result) {
             System.out.println(Arrays.toString(arr));
@@ -23,7 +23,7 @@ public class MergeIntervalsSolver {
 
         int[][] res = new int[num][2];
         int[] curMerged = Arrays.copyOf(intervals[0], 2);
-        int cnt = 0;
+        int cnt = 0; // кол-во интервалов в итоговом ответе
         boolean prevOverlap = false;
         for (int i = 0; i < num; i++) {
             if (i < (num - 1) && curMerged[1] >= intervals[i+1][0] && curMerged[0] <= intervals[i+1][1]) {
@@ -38,9 +38,7 @@ public class MergeIntervalsSolver {
             } else if (i == num - 1 && !prevOverlap) {
                 res[cnt++] = Arrays.copyOf(curMerged, 2);
             } else {
-                if (curMerged[0] != curMerged[1]) {
-                    res[cnt++] = Arrays.copyOf(curMerged, 2);
-                }
+                res[cnt++] = Arrays.copyOf(curMerged, 2);
                 if (i < num - 1) {
                     curMerged[0] = intervals[i+1][0];
                     curMerged[1] = intervals[i+1][1];
