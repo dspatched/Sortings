@@ -129,4 +129,26 @@ public class FindASeat {
 
         return result;
     }
+
+    public static int maxDistToClosest2(boolean[] seats) {
+        int len = seats.length;
+        int prev = -1;
+        int maxDistance = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (seats[i]) {
+                if (prev == -1) {
+                    maxDistance = i;
+                } else {
+                    int distance = (i - prev - 1 + 1) / 2;
+                    maxDistance = Math.max(maxDistance, distance);
+                }
+                prev = i;
+            }
+        }
+
+        maxDistance = Math.max(maxDistance, len - 1 - prev);
+
+        return maxDistance;
+    }
 }
