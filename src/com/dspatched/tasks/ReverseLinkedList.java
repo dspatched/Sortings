@@ -1,33 +1,73 @@
 package com.dspatched.tasks;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class ReverseLinkedList {
 
     public static void main(String[] args) {
-        ListNode c = new ListNode(3, null);
+        ListNode g  = new ListNode(7, null);
+        ListNode f  = new ListNode(6, g);
+        ListNode e = new ListNode(5, f);
+        ListNode d = new ListNode(4, e);
+        ListNode c = new ListNode(3, d);
         ListNode b = new ListNode(2, c);
         ListNode a = new ListNode(1, b);
+//        ListNode c = new ListNode(5, null);
+//        ListNode b = new ListNode(3, c);
+//        ListNode a = new ListNode(1, b);
 
-        ListNode d = new ListNode(5, null);
-        ListNode e = new ListNode(3, d);
-        ListNode f = new ListNode(1, e);
-
-        ListNode res = mergeTwoLists(a, f);
-
-//        a = swapPairs(a);
-
-        ListNode cur = res;
+        ListNode cur = a;
         while (cur != null) {
-            System.out.println(cur.val);
+            System.out.print(cur.val);
             cur = cur.next;
         }
+
+        var result = reverseBetween(a, 3, 6);
+        System.out.println();
+        while (result != null) {
+            System.out.print(result.val);
+            result = result.next;
+        }
+
+//        ListNode c = new ListNode(3, null);
+//        ListNode b = new ListNode(2, c);
+//        ListNode a = new ListNode(1, b);
+//
+//        ListNode cur = a;
+//        while (cur != null) {
+//            System.out.print(cur.val);
+//            cur = cur.next;
+//        }
+//
+//        var result = removeElements(a, 1);
+//        System.out.println();
+//        while (result != null) {
+//            System.out.print(result.val);
+//            result = result.next;
+//        }
+//
+//        ListNode d = new ListNode(5, null);
+//        ListNode e = new ListNode(3, d);
+//        ListNode f = new ListNode(1, e);
+
+//
+//        ListNode res = mergeTwoLists(a, f);
+//
+//        a = swapPairs(a);
+//
+//        ListNode cur = res;
+//        while (cur != null) {
+//            System.out.println(cur.val);
+//            cur = cur.next;
+//        }
 
 //        ListNode l1_2 = new ListNode(9, null);
 //        ListNode l1_1 = new ListNode(4, l1_2);
 //        ListNode l1 = new ListNode(2, l1_1);
-//        //ListNode l1 = new ListNode(9, null);
+//        ListNode l1 = new ListNode(9, null);
 //
 //        ListNode l2_3 = new ListNode(9, null);
 //        ListNode l2_2 = new ListNode(4, l2_3);
@@ -43,12 +83,27 @@ public class ReverseLinkedList {
 //        ListNode l2_2 = new ListNode(9, l2_3);
 //        ListNode l2_1 = new ListNode(9, l2_2);
 //        ListNode l2 = new ListNode(9, l2_1);
-
+//
 //        ListNode cur = addTwoNumbers(l1, l2);
 //        while (cur != null) {
-//            System.out.println(cur.val);
+//            System.out.print(cur.val);
 //            cur = cur.next;
 //        }
+    }
+
+    private static ListNode removeElements(ListNode head, int val) {
+        ListNode dummy = new ListNode(head);
+        ListNode cur = dummy;
+        ListNode next = null;
+        while (cur != null) {
+            next = cur.next;
+            while (next != null && next.val == val) {
+                next = next.next;
+            }
+            cur.next = next;
+            cur = next;
+        }
+        return dummy.next;
     }
 
     private static void reverse(ListNode listNode) {
@@ -61,6 +116,32 @@ public class ReverseLinkedList {
             prev = current;
             current = next;
         }
+    }
+
+    private static ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || head.next == null || left == right) {
+            return head;
+        }
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode prev = dummy;
+        for (int i = 0; i < left - 1; i++) {
+            prev = prev.next;
+        }
+
+        ListNode cur = prev.next;
+        int steps = right - left;
+
+        for (int i = 0; i < steps; i++) {
+            ListNode next = cur.next;
+            cur.next = next.next;
+            next.next = prev.next;
+            prev.next = next;
+        }
+
+        return dummy.next;
     }
 
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
@@ -100,21 +181,21 @@ public class ReverseLinkedList {
     }
 
     private static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        long num1 = readNumber(l1);
-        long num2 = readNumber(l2);
-        long sum = num1 + num2;
+        BigDecimal num1 = BigDecimal.valueOf(readNumber(l1));
+        BigDecimal num2 = BigDecimal.valueOf(readNumber(l2));
+        BigDecimal sum = num1.add(num2);
         return numberToNode(sum);
     }
 
-    private static ListNode numberToNode(long num) {
+    private static ListNode numberToNode(BigDecimal num) {
         int len = (String.valueOf(num)).length();
         ListNode prev = null;
         ListNode cur = null;
         for (int i = len - 1; i >= 0; i--) {
             long digit = (long) Math.pow(10, i);
-            int curVal = (int) ((num / digit) % 10);
+            BigInteger curVal = num.divideToIntegralValue(BigDecimal.valueOf(digit)).remainder(BigDecimal.TEN).toBigInteger();
             prev = cur;
-            cur = new ListNode(curVal, prev);
+            cur = new ListNode((int) curVal.longValue(), prev);
         }
         return cur;
     }
@@ -141,21 +222,14 @@ public class ReverseLinkedList {
         }
         ListNode a = head;
         ListNode b = head;
-        while (true) {
+        while (a != b) {
+            if (b.next == null || b.next.next == null) {
+                return false;
+            }
             a = a.next;
-            b = b.next;
-            if (b.next == null) {
-                return false;
-            } else if (a.val == b.val && a.equals(b)) {
-                return true;
-            }
-            b = b.next;
-            if (b.next == null) {
-                return false;
-            } else if (a.val == b.val && a.equals(b)) {
-                return true;
-            }
+            b = b.next.next;
         }
+        return true;
     }
 
 }
@@ -163,6 +237,10 @@ public class ReverseLinkedList {
 class ListNode {
     int val;
     ListNode next;
+
+    ListNode(ListNode next) {
+        this.next = next;
+    };
 
     ListNode(int val, ListNode next) {
         this.val = val;
