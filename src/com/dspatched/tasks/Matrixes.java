@@ -66,7 +66,7 @@ public class Matrixes {
                         checkNeighbor(field, i + 1, j, rows, col);
                     }
                     if (j < col - 1) {
-                        checkNeighbor(field, i, j+1, rows, col);
+                        checkNeighbor(field, i, j + 1, rows, col);
                     }
                 }
             }
@@ -78,16 +78,16 @@ public class Matrixes {
         if (field[i][j] == 1) {
             field[i][j] = 0;
             if (i < rows - 1) {
-                checkNeighbor(field, i+1, j, rows, col);
+                checkNeighbor(field, i + 1, j, rows, col);
             }
             if (j < col - 1) {
-                checkNeighbor(field, i, j+1, rows, col);
+                checkNeighbor(field, i, j + 1, rows, col);
             }
             if (i > 0) {
-                checkNeighbor(field, i-1, j, rows, col);
+                checkNeighbor(field, i - 1, j, rows, col);
             }
             if (j > 0) {
-                checkNeighbor(field, i, j-1, rows, col);
+                checkNeighbor(field, i, j - 1, rows, col);
             }
         }
     }
