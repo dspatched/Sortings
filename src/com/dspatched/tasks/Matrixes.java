@@ -11,6 +11,10 @@ public class Matrixes {
         int[][] intervals = new int[][]{{1,4},{5,6},{10,12},{11,15}};
         Arrays.stream(merge(intervals))
                 .forEach(arr -> Arrays.stream(arr).forEach(System.out::print));
+
+        System.out.println();
+        int[][] field = new int[][]{{0,1,1,1,0},{1,1,1,0,0},{0,0,0,1,1},{0,1,1,1,1}};
+        System.out.println(numIslands(field));
     }
 
     private static int[][] merge(int[][] intervals) {
@@ -46,6 +50,46 @@ public class Matrixes {
             }
         }
         return Arrays.copyOf(res, cnt);
+    }
+
+    private static int numIslands(int[][] field) {
+        int rows = field.length;
+        int col = field[0].length;
+        int islandCnt = 0;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < col; j++) {
+                if (field[i][j] == 1) {
+                    islandCnt++;
+                    field[i][j] = 0;
+                    if (i < rows - 1) {
+                        checkNeighbor(field, i + 1, j, rows, col);
+                    }
+                    if (j < col - 1) {
+                        checkNeighbor(field, i, j+1, rows, col);
+                    }
+                }
+            }
+        }
+        return islandCnt;
+    }
+
+    private static void checkNeighbor(int[][] field, int i, int j, int rows, int col) {
+        if (field[i][j] == 1) {
+            field[i][j] = 0;
+            if (i < rows - 1) {
+                checkNeighbor(field, i+1, j, rows, col);
+            }
+            if (j < col - 1) {
+                checkNeighbor(field, i, j+1, rows, col);
+            }
+            if (i > 0) {
+                checkNeighbor(field, i-1, j, rows, col);
+            }
+            if (j > 0) {
+                checkNeighbor(field, i, j-1, rows, col);
+            }
+        }
     }
 
     private static boolean searchMatrix(int[][] matrix, int target) {
