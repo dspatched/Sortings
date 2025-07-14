@@ -63,10 +63,10 @@ public class Matrixes {
                     islandCnt++;
                     field[i][j] = 0;
                     if (i < rows - 1) {
-                        checkNeighbor(field, i + 1, j, rows, col);
+                        visitNeighbor(field, i + 1, j, rows, col);
                     }
                     if (j < col - 1) {
-                        checkNeighbor(field, i, j + 1, rows, col);
+                        visitNeighbor(field, i, j + 1, rows, col);
                     }
                 }
             }
@@ -74,20 +74,20 @@ public class Matrixes {
         return islandCnt;
     }
 
-    private static void checkNeighbor(int[][] field, int i, int j, int rows, int col) {
+    private static void visitNeighbor(int[][] field, int i, int j, int rows, int col) {
         if (field[i][j] == 1) {
             field[i][j] = 0;
             if (i < rows - 1) {
-                checkNeighbor(field, i + 1, j, rows, col);
+                visitNeighbor(field, i + 1, j, rows, col);
             }
             if (j < col - 1) {
-                checkNeighbor(field, i, j + 1, rows, col);
+                visitNeighbor(field, i, j + 1, rows, col);
             }
             if (i > 0) {
-                checkNeighbor(field, i - 1, j, rows, col);
+                visitNeighbor(field, i - 1, j, rows, col);
             }
             if (j > 0) {
-                checkNeighbor(field, i, j - 1, rows, col);
+                visitNeighbor(field, i, j - 1, rows, col);
             }
         }
     }
