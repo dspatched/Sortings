@@ -17,6 +17,7 @@ public class TwoPointersSolver {
         System.out.println(solver.threeSumClosest(new int[]{1,3,4,7,8,9}, 15));
     }
 
+    // leetcode 11 (container with most water)
     public int maxArea(int[] height) {
         if (height.length <= 1) {
             return 0;
