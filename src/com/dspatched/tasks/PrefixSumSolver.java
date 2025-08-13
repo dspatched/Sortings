@@ -48,6 +48,7 @@ public class PrefixSumSolver {
         return longestSum;
     }
 
+    // leetcode 560 (subarray sum equals k)
     public int subarraySum(int[] nums, int k) {
         int len = nums.length;
         if (len == 1) {
