@@ -8,7 +8,7 @@ public class PrefixSumSolver {
     public static void main(String[] args) {
         PrefixSumSolver solver = new PrefixSumSolver();
         System.out.println(solver.findMaxLength(new int[]{0,1,0,1,0,1,1,0}));
-        System.out.println(solver.subarraySum(new int[]{1,1,6,2,9,-1,2,0,8}, 8));
+        System.out.println(solver.subarraySum(new int[]{1,1,6,2,-3,11,-1,-2,8}, 8));
     }
 
     // leetcode 525 (contigous array)
