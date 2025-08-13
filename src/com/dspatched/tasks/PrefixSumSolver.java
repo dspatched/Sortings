@@ -49,6 +49,7 @@ public class PrefixSumSolver {
     }
 
     // leetcode 560 (subarray sum equals k)
+    // Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
     public int subarraySum(int[] nums, int k) {
         int len = nums.length;
         if (len == 1) {
