@@ -11,6 +11,8 @@ public class PrefixSumSolver {
         System.out.println(solver.subarraySum(new int[]{1,1,6,2,9,-1,2,0,8}, 8));
     }
 
+    // leetcode 525 (contigous array)
+    // Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1
     public int findMaxLength(int[] nums) {
         int len = nums.length;
         if (len < 2) {
