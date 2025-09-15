@@ -1,16 +1,11 @@
 package com.dspatched.concurrency;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+public class SimpleSynchronizedExample {
 
-public class ReentrantLockExample1 {
-
-    static Lock lock = new ReentrantLock();
-    static Condition condition = lock.newCondition();
-    static volatile AtomicInteger turn = new AtomicInteger(1);
-    static final Integer TASK_COUNT = 3;
+    private static final Object lock = new Object();
+    private static int turn = 1;
+    private static final int TASK_COUNT = 3;
+    private static final int ITERATIONS = 10;
 
     public static void main(String[] args) {
         PrintTask printTask1 = new PrintTask("TASK1", 1);
@@ -36,32 +31,28 @@ public class ReentrantLockExample1 {
     static class PrintTask implements Runnable {
 
         private final String message;
-        private final Integer turnOrder;
+        private final int turnOrder;
 
-        PrintTask(String message, Integer turnOrder) {
+        PrintTask(String message, int turnOrder) {
             this.message = message;
             this.turnOrder = turnOrder;
         }
 
         public void run() {
-            for (int i = 0; i < 10; i++) {
-                lock.lock();
-                try {
-                    while (turn.get() != turnOrder) {
+            for (int i = 0; i < ITERATIONS; i++) {
+                synchronized (lock) {
+                    while (turn != turnOrder) {
                         try {
-                            condition.await();
+                            lock.wait();
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                             return;
                         }
                     }
-                    System.out.println(message);
 
-                    int nextTurn = (turn.get() % TASK_COUNT) + 1;
-                    turn.set(nextTurn);
-                    condition.signalAll();
-                } finally {
-                    lock.unlock();
+                    System.out.println(message);
+                    turn = (turn % TASK_COUNT) + 1;
+                    lock.notifyAll();
                 }
             }
         }
