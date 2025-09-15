@@ -2,3 +2,4 @@
 build
 out
 *.iml
+/src/com/dspatched/test/
