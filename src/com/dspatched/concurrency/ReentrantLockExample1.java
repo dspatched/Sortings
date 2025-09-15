@@ -10,7 +10,7 @@ public class ReentrantLockExample1 {
     static Lock lock = new ReentrantLock();
     static Condition condition = lock.newCondition();
     static volatile AtomicInteger turn = new AtomicInteger(1);
-    static final Integer taskLimit = 3;
+    static final Integer TASK_COUNT = 3;
 
     public static void main(String[] args) {
         PrintTask printTask1 = new PrintTask("TASK1", 1);
@@ -47,15 +47,11 @@ public class ReentrantLockExample1 {
                             return;
                         }
                     }
-
                     System.out.println(message);
 
-                    if (turn.get() != taskLimit) {
-                        turn.getAndIncrement();
-                    } else {
-                        turn = new AtomicInteger(1);
-                    }
-                    condition.signal();
+                    int nextTurn = (turn.get() % TASK_COUNT) + 1;
+                    turn.set(nextTurn);
+                    condition.signalAll();
                 } finally {
                     lock.unlock();
                 }
