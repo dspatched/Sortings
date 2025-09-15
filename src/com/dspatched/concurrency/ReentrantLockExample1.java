@@ -11,6 +11,7 @@ public class ReentrantLockExample1 {
     static Condition condition = lock.newCondition();
     static volatile AtomicInteger turn = new AtomicInteger(1);
     static final Integer TASK_COUNT = 3;
+    private static final int ITERATIONS = 10;
 
     public static void main(String[] args) {
         PrintTask printTask1 = new PrintTask("TASK1", 1);
@@ -44,7 +45,7 @@ public class ReentrantLockExample1 {
         }
 
         public void run() {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < ITERATIONS; i++) {
                 lock.lock();
                 try {
                     while (turn.get() != turnOrder) {
