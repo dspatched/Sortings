@@ -15,9 +15,9 @@ public class CyclicBarrierExample {
     });
 
     public static void main(String[] args) {
-        ReentrantLockExample1.PrintTask printTask1 = new ReentrantLockExample1.PrintTask("TASK1", 1);
-        ReentrantLockExample1.PrintTask printTask2 = new ReentrantLockExample1.PrintTask("TASK2", 2);
-        ReentrantLockExample1.PrintTask printTask3 = new ReentrantLockExample1.PrintTask("TASK3", 3);
+        PrintTask printTask1 = new PrintTask("TASK1", 1);
+        PrintTask printTask2 = new PrintTask("TASK2", 2);
+        PrintTask printTask3 = new PrintTask("TASK3", 3);
         Thread t1 = new Thread(printTask1);
         Thread t2 = new Thread(printTask2);
         Thread t3 = new Thread(printTask3);
