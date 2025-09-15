@@ -47,7 +47,7 @@ public class PhaserExample {
         public void run() {
             for (int i = 0; i < ITERATIONS; i++) {
                 while (turn.get() != turnOrder) {
-                    Thread.yield(); // Still need busy wait for ordering
+                    Thread.yield();
                 }
 
                 System.out.println(message + " - Iteration " + (i + 1));
