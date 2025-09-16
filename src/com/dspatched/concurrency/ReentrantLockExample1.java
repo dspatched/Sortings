@@ -58,8 +58,7 @@ public class ReentrantLockExample1 {
                     }
                     System.out.println(message);
 
-                    int nextTurn = (turn.get() % TASK_COUNT) + 1;
-                    turn.set(nextTurn);
+                    turn.set((turn.get() % TASK_COUNT) + 1);
                     condition.signalAll();
                 } finally {
                     lock.unlock();
